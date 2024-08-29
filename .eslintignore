@@ -1,0 +1,8 @@
+node_modules/*
+dist/*
+build/*
+public/*
+
+# temporary only for wlib
+/src/packages/@pontem/wlib/wdapps
+generated-types.ts
