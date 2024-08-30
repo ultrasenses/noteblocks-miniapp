@@ -2,8 +2,18 @@ import { SDKProvider, useLaunchParams } from '@telegram-apps/sdk-react';
 import { TonConnectUIProvider } from '@tonconnect/ui-react';
 import { FC, useEffect, useMemo } from 'react';
 import { App } from './App';
+import { ErrorBoundary } from './ErrorBoundary';
 
-export const Root: FC = () => {
+const ErrorBoundaryError: FC<{ error: unknown }> = ({ error }) => (
+  <div>
+    <p>An unhandled error occurred:</p>
+    <blockquote>
+      <code>{error instanceof Error ? error.message : typeof error === 'string' ? error : JSON.stringify(error)}</code>
+    </blockquote>
+  </div>
+);
+
+const Inner: FC = () => {
   const debug = useLaunchParams().startParam === 'debug';
   const manifestUrl = useMemo(() => {
     return new URL('tonconnect-manifest.json', window.location.href).toString();
@@ -15,6 +25,7 @@ export const Root: FC = () => {
       import('eruda').then((lib) => lib.default.init());
     }
   }, [debug]);
+
   return (
     <TonConnectUIProvider manifestUrl={manifestUrl}>
       <SDKProvider
@@ -26,3 +37,9 @@ export const Root: FC = () => {
     </TonConnectUIProvider>
   );
 };
+
+export const Root: FC = () => (
+  <ErrorBoundary fallback={ErrorBoundaryError}>
+    <Inner />
+  </ErrorBoundary>
+);
