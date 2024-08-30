@@ -39,8 +39,10 @@ const Inner: FC = () => {
     </TonConnectUIProvider>
   );
 
+  // const theme = createTheme();
+
   // return (
-  //   <MantineProvider>
+  //   <MantineProvider theme={theme}>
   //     <BrowserRouter>
   //       <Routes>
   //         {routes.map((route) => (

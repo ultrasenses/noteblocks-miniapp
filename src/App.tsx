@@ -13,6 +13,7 @@ import { Navigate, Route, Router, Routes } from 'react-router-dom';
 
 import { MantineProvider } from '@mantine/core';
 import { routes } from './pages/routes';
+import { createTheme } from './theme';
 
 export const App: FC = () => {
   const miniApp = useMiniApp();
@@ -43,8 +44,13 @@ export const App: FC = () => {
     return () => navigator.detach();
   }, [navigator]);
 
+  const theme = createTheme();
+
   return (
-    <MantineProvider forceColorScheme={miniApp.isDark ? 'dark' : 'light'}>
+    <MantineProvider
+      theme={theme}
+      forceColorScheme={miniApp.isDark ? 'dark' : 'light'}
+    >
       <Router
         location={location}
         navigator={reactNavigator}
