@@ -1,5 +1,5 @@
 {
-  "name": "noteblocks-frontend",
+  "name": "noteblocks-miniapp",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -19,6 +19,7 @@
     "@mantine/spotlight": "^7.12.1",
     "@telegram-apps/react-router-integration": "^1.0.1",
     "@telegram-apps/sdk-react": "^1.1.3",
+    "@telegram-auth/react": "^1.0.3",
     "@tonconnect/ui-react": "^2.0.9",
     "eruda": "^3.2.3",
     "react": "^18.3.1",
