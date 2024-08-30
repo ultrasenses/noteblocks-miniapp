@@ -1,8 +1,11 @@
+// import { MantineProvider } from '@mantine/core';
+import { FC, useEffect, useMemo } from 'react';
+// import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 import { SDKProvider, useLaunchParams } from '@telegram-apps/sdk-react';
 import { TonConnectUIProvider } from '@tonconnect/ui-react';
-import { FC, useEffect, useMemo } from 'react';
 import { App } from './App';
 import { ErrorBoundary } from './ErrorBoundary';
+// import { routes } from './pages/routes';
 
 const ErrorBoundaryError: FC<{ error: unknown }> = ({ error }) => (
   <div>
@@ -35,6 +38,25 @@ const Inner: FC = () => {
       </SDKProvider>
     </TonConnectUIProvider>
   );
+
+  // return (
+  //   <MantineProvider>
+  //     <BrowserRouter>
+  //       <Routes>
+  //         {routes.map((route) => (
+  //           <Route
+  //             key={route.path}
+  //             {...route}
+  //           />
+  //         ))}
+  //         <Route
+  //           path='*'
+  //           element={<Navigate to='/' />}
+  //         />
+  //       </Routes>
+  //     </BrowserRouter>
+  //   </MantineProvider>
+  // );
 };
 
 export const Root: FC = () => (

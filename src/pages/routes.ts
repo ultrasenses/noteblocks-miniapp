@@ -1,5 +1,6 @@
 import type { ComponentType, JSX } from 'react';
 
+import { DocumentPage } from './DocumentPage';
 import { IndexPage } from './IndexPage';
 
 interface Route {
@@ -9,4 +10,7 @@ interface Route {
   icon?: JSX.Element;
 }
 
-export const routes: Route[] = [{ path: '/', Component: IndexPage }];
+export const routes: Route[] = [
+  { path: '/', Component: IndexPage },
+  { path: '/document', Component: DocumentPage }
+];

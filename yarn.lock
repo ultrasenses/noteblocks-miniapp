@@ -22,6 +22,39 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@ariakit/core@npm:0.4.9":
+  version: 0.4.9
+  resolution: "@ariakit/core@npm:0.4.9"
+  checksum: 10c0/17a2b95804b3d3b1d7c6bc6aeef25dc300b3d7303e700c70878cfaea203105a5f1a0b5c67b7997d911cda0ba5895783ef2d3b5b83268a4e24d504eb67fa25fec
+  languageName: node
+  linkType: hard
+
+"@ariakit/react-core@npm:0.4.10":
+  version: 0.4.10
+  resolution: "@ariakit/react-core@npm:0.4.10"
+  dependencies:
+    "@ariakit/core": "npm:0.4.9"
+    "@floating-ui/dom": "npm:^1.0.0"
+    use-sync-external-store: "npm:^1.2.0"
+  peerDependencies:
+    react: ^17.0.0 || ^18.0.0 || ^19.0.0
+    react-dom: ^17.0.0 || ^18.0.0 || ^19.0.0
+  checksum: 10c0/eeb51c643ad36af8a293cc0fe3267214780ce9e97811dc44e69166f4592282efe0fd452bf12fee09a74f8deacce73a4c8d1859d0c11fbb4ca2b1a3dde2c7e708
+  languageName: node
+  linkType: hard
+
+"@ariakit/react@npm:^0.4.3":
+  version: 0.4.10
+  resolution: "@ariakit/react@npm:0.4.10"
+  dependencies:
+    "@ariakit/react-core": "npm:0.4.10"
+  peerDependencies:
+    react: ^17.0.0 || ^18.0.0 || ^19.0.0
+    react-dom: ^17.0.0 || ^18.0.0 || ^19.0.0
+  checksum: 10c0/ed70c8b25694cec6022cd9fff87ef1ced57f75803df2db2c362a38f3dc15fb345cdd60b6c63aa7d305cef489ff2a49ef964cee9d5d518f09319d169a071a8190
+  languageName: node
+  linkType: hard
+
 "@babel/code-frame@npm:^7.24.7":
   version: 7.24.7
   resolution: "@babel/code-frame@npm:7.24.7"
@@ -247,6 +280,22 @@ __metadata:
     "@babel/helper-validator-identifier": "npm:^7.24.7"
     to-fast-properties: "npm:^2.0.0"
   checksum: 10c0/89d45fbee24e27a05dca2d08300a26b905bd384a480448823f6723c72d3a30327c517476389b7280ce8cb9a2c48ef8f47da7f9f6d326faf6f53fd6b68237bdc4
+  languageName: node
+  linkType: hard
+
+"@blocknote/ariakit@npm:^0.15.6":
+  version: 0.15.6
+  resolution: "@blocknote/ariakit@npm:0.15.6"
+  dependencies:
+    "@ariakit/react": "npm:^0.4.3"
+    "@blocknote/core": "npm:^0.15.6"
+    "@blocknote/react": "npm:^0.15.6"
+    react: "npm:^18"
+    react-dom: "npm:^18"
+  peerDependencies:
+    react: ^18
+    react-dom: ^18
+  checksum: 10c0/279914b3ddcc218c549844758af2114bb644ba242bac2c57fea4758a7bd1eee36ab29c524064ba02c6f40ccfaa0749738c8dc45f49063208264bd33420991b08
   languageName: node
   linkType: hard
 
@@ -5116,6 +5165,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "noteblocks-miniapp@workspace:."
   dependencies:
+    "@blocknote/ariakit": "npm:^0.15.6"
     "@blocknote/core": "npm:^0.15.6"
     "@blocknote/mantine": "npm:^0.15.6"
     "@blocknote/react": "npm:^0.15.6"
@@ -7236,7 +7286,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"use-sync-external-store@npm:1.2.2, use-sync-external-store@npm:^1.2.2":
+"use-sync-external-store@npm:1.2.2, use-sync-external-store@npm:^1.2.0, use-sync-external-store@npm:^1.2.2":
   version: 1.2.2
   resolution: "use-sync-external-store@npm:1.2.2"
   peerDependencies:

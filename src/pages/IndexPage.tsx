@@ -1,6 +1,6 @@
+import { Text } from '@mantine/core';
 import type { FC } from 'react';
-import { BlockNote } from '../components/BlockNote';
 
 export const IndexPage: FC = () => {
-  return <BlockNote />;
+  return <Text>This is index page</Text>;
 };
