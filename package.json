@@ -22,6 +22,7 @@
     "@telegram-auth/react": "^1.0.3",
     "@tiptap/pm": "^2.6.6",
     "@tonconnect/ui-react": "^2.0.9",
+    "@vitejs/plugin-basic-ssl": "^1.1.0",
     "eruda": "^3.2.3",
     "react": "^18.3.1",
     "react-canvas-confetti": "^2.0.7",
