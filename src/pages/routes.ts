@@ -1,7 +1,7 @@
 import type { ComponentType, JSX } from 'react';
 
-import { DocumentPage } from './DocumentPage';
 import { IndexPage } from './IndexPage';
+import { NotePage } from './NotePage';
 
 interface Route {
   path: string;
@@ -12,5 +12,5 @@ interface Route {
 
 export const routes: Route[] = [
   { path: '/', Component: IndexPage },
-  { path: '/document', Component: DocumentPage }
+  { path: '/note/:id', Component: NotePage }
 ];

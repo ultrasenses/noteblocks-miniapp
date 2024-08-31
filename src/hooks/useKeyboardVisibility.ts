@@ -5,7 +5,7 @@ interface KeyboardVisibility {
   keyboardOffset: number;
 }
 
-const useKeyboardVisibility = (): KeyboardVisibility => {
+export const useKeyboardVisibility = (): KeyboardVisibility => {
   const [isKeyboardVisible, setIsKeyboardVisible] = useState(false);
   const [keyboardOffset, setKeyboardOffset] = useState(0);
 
@@ -41,5 +41,3 @@ const useKeyboardVisibility = (): KeyboardVisibility => {
 
   return { isKeyboardVisible, keyboardOffset };
 };
-
-export default useKeyboardVisibility;

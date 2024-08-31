@@ -1,26 +1,37 @@
-import Masonry from 'react-layout-masonry';
 import { Box, Text, TextInput } from '@mantine/core';
 import { FC, useState } from 'react';
-import { IconFilePlus, IconSearch } from '@tabler/icons-react';
+import Masonry from 'react-layout-masonry';
+import { useNavigate } from 'react-router-dom';
+import { v4 as uuidv4 } from 'uuid';
+import AddFileIcon from '../assets/add-file.svg?react';
+import SearchIcon from '../assets/search.svg?react';
+import { PreviewCard } from '../components/PreviewCard';
+import { useNotesStore } from '../store/notesStore';
 
 export const IndexPage: FC = () => {
   const [selectedFilter, setSelectedFilter] = useState('recent');
-  const heightValues = [180, 220, 260, 280, 300];
-  const Card = () => (
-    <Box
-      bg='#464646'
-      h={heightValues[(heightValues.length * Math.random()) | 0]}
-      style={{ flexDirection: 'column', display: 'flex', padding: '12px', borderRadius: '12px' }}
-    >
-      <Text
-        size='lg'
-        fw={600}
-        c='#CECECEFF'
-      >
-        File name
-      </Text>
-    </Box>
-  );
+  const [searchQuery, setSearchQuery] = useState('');
+  const { addNote, isLimitReached, notes } = useNotesStore();
+  const navigate = useNavigate();
+  const handleAddNote = () => {
+    if (!isLimitReached()) {
+      const date = Date.now();
+      const id = uuidv4();
+      const newNote = {
+        id: id,
+        content: '',
+        title: 'Untitled',
+        isPublished: false,
+        userId: 1, // Example userId, replace with actual userId
+        lastSyncDate: date,
+        createdDate: date,
+        lastModifiedDate: date,
+        isPinned: false
+      };
+      addNote(newNote);
+      navigate(`/note/${id}`);
+    }
+  };
 
   const filters = [
     {
@@ -33,6 +44,8 @@ export const IndexPage: FC = () => {
     }
   ];
 
+  const filteredNotes = notes.filter((note) => note.title.toLowerCase().includes(searchQuery.toLowerCase()));
+
   return (
     <Box
       maw='390px'
@@ -40,6 +53,8 @@ export const IndexPage: FC = () => {
     >
       <TextInput
         placeholder='Найти'
+        value={searchQuery}
+        onChange={(event) => setSearchQuery(event.currentTarget.value)}
         styles={{
           input: {
             backgroundColor: '#323232',
@@ -54,7 +69,12 @@ export const IndexPage: FC = () => {
             marginBottom: 12
           }
         }}
-        leftSection={<IconSearch size={24} />}
+        leftSection={
+          <SearchIcon
+            width={24}
+            height={24}
+          />
+        }
         leftSectionWidth={44}
       />
       <Box
@@ -67,6 +87,7 @@ export const IndexPage: FC = () => {
         }}
       >
         <Box
+          onClick={handleAddNote}
           style={{
             borderRadius: 44,
             width: 44,
@@ -77,10 +98,10 @@ export const IndexPage: FC = () => {
             justifyContent: 'center'
           }}
         >
-          <IconFilePlus
-            size={30}
-            fill='white'
-            stroke={1.5}
+          <AddFileIcon
+            width={28}
+            height={28}
+            color='white'
           />
         </Box>
         {filters.map((filter, index) => (
@@ -111,14 +132,30 @@ export const IndexPage: FC = () => {
         bg='#242424'
         mt={16}
       >
-        <Masonry
-          columns={2}
-          gap={12}
-        >
-          {Array.from({ length: 4 }).map(() => (
-            <Card />
-          ))}
-        </Masonry>
+        {filteredNotes.length > 0 ? (
+          <Masonry
+            columns={2}
+            gap={12}
+          >
+            {filteredNotes.map((note) => (
+              <PreviewCard
+                key={note.id}
+                id={note.id}
+                title={note.title}
+              />
+            ))}
+          </Masonry>
+        ) : (
+          <Text
+            size='md'
+            fw={600}
+            c='#CECECEFF'
+            ta='center'
+            mt={16}
+          >
+            No notes found
+          </Text>
+        )}
       </Box>
     </Box>
   );

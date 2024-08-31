@@ -1,9 +1,12 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
-import { cloudStorage } from '../utils/cloudStorage';
+// import { cloudStorage } from '../utils/cloudStorage';
 
-interface Note {
-  id: number;
+export interface Note {
+  id: string;
+  title: string;
+  icon?: string;
+  cover?: string;
   content: string;
   userId: number;
   isPublished: boolean;
@@ -16,17 +19,17 @@ interface Note {
 interface NotesState {
   notes: Note[];
   addNote: (note: Note) => void;
-  updateNoteById: (id: number, updatedNote: Partial<Note>) => void;
-  deleteNoteById: (id: number) => void;
-  pinNoteById: (id: number) => void;
-  unpinNoteById: (id: number) => void;
+  updateNoteById: (id: string, updatedNote: Partial<Note>) => void;
+  deleteNoteById: (id: string) => void;
+  pinNoteById: (id: string) => void;
+  unpinNoteById: (id: string) => void;
   clearAll: () => void;
-  isLimitReached: boolean;
-  getNoteById: (id: number) => Note | undefined;
-  lastModifiedNote: Note | undefined;
-  allNotes: Note[];
-  pinnedNotes: Note[];
-  regularNotes: Note[];
+  getNoteById: (id: string) => Note | undefined;
+  isLimitReached: () => boolean;
+  lastModifiedNote: () => Note | undefined;
+  allNotes: () => Note[];
+  pinnedNotes: () => Note[];
+  regularNotes: () => Note[];
 }
 
 export const useNotesStore = create<NotesState, [['zustand/persist', Note[]]]>(
@@ -58,38 +61,28 @@ export const useNotesStore = create<NotesState, [['zustand/persist', Note[]]]>(
         })),
       getNoteById: (id) => get().notes.find((note) => note.id === id),
       clearAll: () => set({ notes: [] }),
-      get isLimitReached() {
-        return get().notes.length >= 500;
-      },
-      get lastModifiedNote() {
-        return get().notes.reduce(
+      isLimitReached: () => get().notes.length >= 500,
+      lastModifiedNote: () =>
+        get().notes.reduce(
           (latest, note) => {
             return latest && latest.lastModifiedDate > note.lastModifiedDate ? latest : note;
           },
           undefined as Note | undefined
-        );
-      },
-      get lastSyncedNote() {
-        return get().notes.reduce(
+        ),
+      lastSyncedNote: () =>
+        get().notes.reduce(
           (latest, note) => {
             return latest && latest.lastSyncDate > note.lastSyncDate ? latest : note;
           },
           undefined as Note | undefined
-        );
-      },
-      get allNotes() {
-        return get().notes;
-      },
-      get pinnedNotes() {
-        return get().notes.filter((note) => note.isPinned);
-      },
-      get regularNotes() {
-        return get().notes.filter((note) => !note.isPinned);
-      }
+        ),
+      allNotes: () => get().notes,
+      pinnedNotes: () => get().notes.filter((note) => note.isPinned),
+      regularNotes: () => get().notes.filter((note) => !note.isPinned)
     }),
     {
       name: 'notes-storage', // name of the item in the storage
-      getStorage: () => cloudStorage,
+      // getStorage: () => cloudStorage,
       onRehydrateStorage: () => {
         console.log('[Notes storage]: hydration starts');
 
