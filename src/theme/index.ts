@@ -1,4 +1,5 @@
 import { MantineThemeOverride } from '@mantine/core';
+import '../theme/index.css';
 
 export const createTheme = () => {
   const theme: MantineThemeOverride = {
