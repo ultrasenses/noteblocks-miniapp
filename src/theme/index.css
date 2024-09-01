@@ -16,3 +16,8 @@
 body {
   background-color: #242424;
 }
+
+.bn-editor {
+  height: calc(100vh - 128px);
+  padding: 16px;
+}
