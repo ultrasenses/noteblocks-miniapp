@@ -1,7 +1,7 @@
 import type { ComponentType, JSX } from 'react';
 
-import { IndexPage } from './IndexPage';
-import { NotePage } from './NotePage';
+import { IndexPage } from './IndexPage/IndexPage.tsx';
+import { NotePage } from './NotPage/NotePage.tsx';
 
 interface Route {
   path: string;

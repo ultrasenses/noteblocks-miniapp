@@ -1,4 +1,4 @@
-import { MantineThemeOverride } from '@mantine/core';
+import { Container, MantineThemeOverride } from '@mantine/core';
 import '../theme/index.css';
 
 export const createTheme = () => {
@@ -8,7 +8,17 @@ export const createTheme = () => {
     colors: {
       'telegram-blue': ['#e3f5ff', '#cce6ff', '#99cbff', '#62afff', '#3697ff', '#1887ff', '#007fff', '#006de5', '#0061ce', '#0053b6']
     },
-    focusRing: 'never'
+    focusRing: 'never',
+    components: {
+      Container: Container.extend({
+        vars: () => ({
+          root: {
+            '--container-size': '390px',
+            paddingTop: '12px'
+          }
+        })
+      })
+    }
   };
 
   return theme;

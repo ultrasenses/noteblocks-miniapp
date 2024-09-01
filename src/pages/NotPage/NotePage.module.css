@@ -1,0 +1,26 @@
+.buttonsRow_box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+    gap: 12px;
+    margin-bottom: 12px;
+}
+.openInBrowser_box {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    height: 36px;
+    background-color: #323232;
+    border-radius: 24px;
+    width: 60%;
+}
+.share_box {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    height: 36px;
+    background-color: #2990FF;
+    border-radius: 24px;
+    width: 40%;
+}

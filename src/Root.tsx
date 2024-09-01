@@ -1,4 +1,4 @@
-import { MantineProvider } from '@mantine/core';
+import { Container, MantineProvider } from '@mantine/core';
 import {
   FC
   // , useEffect, useMemo
@@ -48,18 +48,20 @@ const Inner: FC = () => {
   return (
     <MantineProvider theme={theme}>
       <BrowserRouter>
-        <Routes>
-          {routes.map((route) => (
+        <Container>
+          <Routes>
+            {routes.map((route) => (
+              <Route
+                key={route.path}
+                {...route}
+              />
+            ))}
             <Route
-              key={route.path}
-              {...route}
+              path='*'
+              element={<Navigate to='/' />}
             />
-          ))}
-          <Route
-            path='*'
-            element={<Navigate to='/' />}
-          />
-        </Routes>
+          </Routes>
+        </Container>
       </BrowserRouter>
     </MantineProvider>
   );
